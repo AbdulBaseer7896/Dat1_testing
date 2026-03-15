@@ -185,12 +185,13 @@ exports.isLoggedIn = async (req, res) => {
       return res.status(401).json({ message: 'User is Banned' });
     }
 
-    user.isOnline = new Date();
-    await user.save();
+    // Update isOnline WITHOUT awaiting it — fire and forget.
+    // Awaiting this adds an extra DB write to every check-session call,
+    // slowing the response for all 8 users and causing timeouts.
+    User.findByIdAndUpdate(user._id, { isOnline: new Date() }).catch(() => {});
 
     let getPermission = await UserPermission.findOne({ userId: user._id });
     if (!getPermission) {
-      // Auto-create permission record for fresh databases
       getPermission = new UserPermission({ userId: user._id });
       await getPermission.save();
     }
@@ -201,7 +202,6 @@ exports.isLoggedIn = async (req, res) => {
       _id: { $in: getPermission.domains || [] }
     });
 
-    // If session exists, return success
     res.json({ id: user._id, name: user.name, email: user.email, role: user.role, token, permission: getPermission, datAccount: getDataSession, allowedDomains: relatedDomains });
   } catch (error) {
     console.error('Error verifying token:', error.message);
