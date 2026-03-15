@@ -1,0 +1,70 @@
+
+0) creat a .env
+
+
+MONGO_URI="mongodb+srv://username:password@cluster0.wnsgkqe.mongodb.net/DatOne_Jasper"
+JWT_SECRET="thisisjustasecritkey"
+PORT=3000
+
+
+
+1) nano /etc/systemd/system/datone.service
+
+1.1) First check where you node is intall 
+
+which node
+
+if its in (/usr/bin/node) then its ok
+
+[Unit]
+Description=Dat-One Node.js Server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/DatOneByme
+ExecStart=/usr/bin/node /root/DatOneByme/server.js
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl daemon-reload
+systemctl restart datone
+systemctl status datone
+
+
+
+
+journalctl -u datone -f
+
+
+Login
+
+hash 
+
+
+123456 == $2a$10$cGYHFBQ7griEj.gM.7sJ1.HP1LqYpgME1xq0tsh1Fjf3sJpNh6Rc2
+
+{
+  "_id": {
+    "$oid": "69ab6709c44cb42d3d33275c"
+  },
+  "name": "asim bhai",
+  "email": "Asim@dat.com",
+  "password": "$2a$10$cGYHFBQ7griEj.gM.7sJ1.HP1LqYpgME1xq0tsh1Fjf3sJpNh6Rc2",
+  "role": "admin",
+  "isBanned": false,
+  "isOnline": null,
+  "createdAt": {
+    "$date": "2026-03-06T23:45:13.833Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-06T23:45:13.833Z"
+  },
+  "__v": 0
+}
