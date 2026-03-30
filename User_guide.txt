@@ -1,4 +1,12 @@
 
+how to install the node.js on the server.
+
+
+sudo apt update && sudo apt upgrade -y
+
+sudo apt install -y nodejs npm
+
+
 0) creat a .env
 
 
@@ -34,9 +42,9 @@ WantedBy=multi-user.target
 
 
 systemctl daemon-reload
-systemctl restart datone
-systemctl status datone
-
+systemctl restart datone   / datone_testing
+systemctl status datone    / datone_testing
+   
 
 
 
@@ -54,8 +62,8 @@ hash
   "_id": {
     "$oid": "69ab6709c44cb42d3d33275c"
   },
-  "name": "asim bhai",
-  "email": "Asim@dat.com",
+  "name": "Admin Bitnex",
+  "email": "adminbitnex@dat.com",
   "password": "$2a$10$cGYHFBQ7griEj.gM.7sJ1.HP1LqYpgME1xq0tsh1Fjf3sJpNh6Rc2",
   "role": "admin",
   "isBanned": false,

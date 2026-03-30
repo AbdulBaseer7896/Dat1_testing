@@ -54,7 +54,7 @@ const WhitelistedDomain = require('../models/WhitelistedDomain');
 
 exports.health = async (req, res) =>{
   res.json({
-    "health" : "ok"
+    "health" : "ok: This is Bitnex-1-1.0 And its working Fine."
   })
 
 }
